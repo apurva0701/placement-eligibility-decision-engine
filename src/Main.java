@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +10,10 @@ public class Main {
         int graduationYear = scanner.nextInt();
 
         Candidate candidate = new Candidate(
-                name, percentage, backlogs, graduationYear);
+                name,
+                percentage,
+                backlogs,
+                graduationYear);
 
         Job job = new Job(
                 "Infosys",
@@ -20,17 +22,11 @@ public class Main {
                 0,
                 2026);
 
-        boolean percentagePass = candidate.getPercentage() >= job.getMinimumPercentage();
+        EligibilityChecker checker = new EligibilityChecker();
 
-        boolean backlogPass = candidate.getBacklogs() <= job.getMaximumBacklogs();
-
-        boolean yearPass = candidate.getGraduationYear() == job.getRequiredGraduationYear();
-
-        boolean eligible = percentagePass && backlogPass && yearPass;
-
-        System.out.println("==================================");
+        System.out.println("================================");
         System.out.println("PLACEMENT ELIGIBILITY RESULT");
-        System.out.println("==================================");
+        System.out.println("================================");
 
         System.out.println();
         System.out.println("Candidate : " + candidate.getName());
@@ -38,23 +34,7 @@ public class Main {
         System.out.println("Role      : " + job.getRole());
         System.out.println();
 
-        if (percentagePass) {
-            System.out.println("Percentage     : PASS");
-        } else {
-            System.out.println("Percentage     : FAIL");
-        }
-
-        if (backlogPass) {
-            System.out.println("Backlogs       : PASS");
-        } else {
-            System.out.println("Backlogs       : FAIL");
-        }
-
-        if (yearPass) {
-            System.out.println("Graduation Year: PASS");
-        } else {
-            System.out.println("Graduation Year: FAIL");
-        }
+        boolean eligible = checker.evaluate(candidate, job);
 
         System.out.println();
 
@@ -64,7 +44,7 @@ public class Main {
             System.out.println("Final Result : NOT ELIGIBLE");
         }
 
-        System.out.println("==================================");
+        System.out.println("================================");
 
         scanner.close();
     }
