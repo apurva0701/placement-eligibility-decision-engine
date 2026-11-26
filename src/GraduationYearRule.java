@@ -1,4 +1,6 @@
+
 public class GraduationYearRule extends EligibilityRule {
+
     @Override
     public String getRuleName() {
         return "Graduation Year";
@@ -6,7 +8,6 @@ public class GraduationYearRule extends EligibilityRule {
 
     @Override
     public boolean check(Candidate candidate, Job job) {
-        return candidate.getGraduationYear() == job.getGraduationYear();
+        return candidate.getGraduationYear() == job.getRequiredGraduationYear();
     }
-
 }

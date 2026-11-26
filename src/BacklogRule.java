@@ -1,4 +1,6 @@
+
 public class BacklogRule extends EligibilityRule {
+
     @Override
     public String getRuleName() {
         return "Backlogs";
@@ -8,5 +10,4 @@ public class BacklogRule extends EligibilityRule {
     public boolean check(Candidate candidate, Job job) {
         return candidate.getBacklogs() <= job.getMaximumBacklogs();
     }
-
 }

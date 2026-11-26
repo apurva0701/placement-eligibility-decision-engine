@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Main {
@@ -9,32 +10,65 @@ public class Main {
         int backlogs = scanner.nextInt();
         int graduationYear = scanner.nextInt();
 
-        Candidate candidate = new Candidate(
-                name,
-                percentage,
-                backlogs,
-                graduationYear);
+        int skillCount = scanner.nextInt();
+        String[] skills = new String[skillCount];
 
-        Job job = new Job(
-                "Infosys",
-                "Java Developer",
-                65.0,
-                0,
-                2026);
+        for (int i = 0; i < skillCount; i++) {
+            skills[i] = scanner.next();
+        }
+
+        Candidate candidate = new Candidate(
+                name, percentage, backlogs, graduationYear, skills);
+
+        int jobCount = scanner.nextInt();
+
+        if (jobCount <= 0) {
+            System.out.println("No jobs available.");
+            scanner.close();
+            return;
+        }
+
+        Job[] jobs = new Job[jobCount];
+
+        for (int i = 0; i < jobCount; i++) {
+            String company = scanner.next();
+            String role = scanner.next();
+            double minimumPercentage = scanner.nextDouble();
+            int maximumBacklogs = scanner.nextInt();
+            int requiredGraduationYear = scanner.nextInt();
+
+            int requiredSkillCount = scanner.nextInt();
+            String[] requiredSkills = new String[requiredSkillCount];
+
+            for (int j = 0; j < requiredSkillCount; j++) {
+                requiredSkills[j] = scanner.next();
+            }
+
+            jobs[i] = new Job(
+                    company,
+                    role,
+                    minimumPercentage,
+                    maximumBacklogs,
+                    requiredGraduationYear,
+                    requiredSkills);
+        }
+
+        // Temporary: evaluate the first job
+        Job selectedJob = jobs[0];
 
         EligibilityChecker checker = new EligibilityChecker();
 
         System.out.println("================================");
         System.out.println("PLACEMENT ELIGIBILITY RESULT");
         System.out.println("================================");
-
         System.out.println();
+
         System.out.println("Candidate : " + candidate.getName());
-        System.out.println("Company   : " + job.getCompany());
-        System.out.println("Role      : " + job.getRole());
+        System.out.println("Company   : " + selectedJob.getCompany());
+        System.out.println("Role      : " + selectedJob.getRole());
         System.out.println();
 
-        boolean eligible = checker.evaluate(candidate, job);
+        boolean eligible = checker.evaluate(candidate, selectedJob);
 
         System.out.println();
 
