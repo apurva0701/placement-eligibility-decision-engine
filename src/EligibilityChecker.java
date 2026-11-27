@@ -1,5 +1,6 @@
 
 public class EligibilityChecker {
+
     private EligibilityRule[] rules;
 
     public EligibilityChecker() {

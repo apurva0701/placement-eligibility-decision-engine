@@ -53,16 +53,37 @@ public class Main {
                     requiredSkills);
         }
 
-        // Temporary: evaluate the first job
-        Job selectedJob = jobs[0];
-
         EligibilityChecker checker = new EligibilityChecker();
 
+        System.out.println();
         System.out.println("================================");
         System.out.println("PLACEMENT ELIGIBILITY RESULT");
         System.out.println("================================");
+
+        System.out.println();
+        System.out.println("Candidate : " + candidate.getName());
+        System.out.println();
+        System.out.println("AVAILABLE JOBS");
+
+        for (int i = 0; i < jobs.length; i++) {
+            System.out.println(
+                    (i + 1) + ". " +
+                            jobs[i].getCompany() + " - " +
+                            jobs[i].getRole());
+        }
+
         System.out.println();
 
+        int selectedJobNumber = scanner.nextInt();
+
+        while (selectedJobNumber < 1 || selectedJobNumber > jobCount) {
+            System.out.println("Invalid job number. Enter again:");
+            selectedJobNumber = scanner.nextInt();
+        }
+
+        Job selectedJob = jobs[selectedJobNumber - 1];
+
+        System.out.println();
         System.out.println("Candidate : " + candidate.getName());
         System.out.println("Company   : " + selectedJob.getCompany());
         System.out.println("Role      : " + selectedJob.getRole());

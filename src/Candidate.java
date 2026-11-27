@@ -6,8 +6,13 @@ public class Candidate {
     private int graduationYear;
     private String[] skills;
 
-    public Candidate(String name, double percentage, int backlogs,
-            int graduationYear, String[] skills) {
+    public Candidate(
+            String name,
+            double percentage,
+            int backlogs,
+            int graduationYear,
+            String[] skills) {
+
         this.name = name;
         this.percentage = percentage;
         this.backlogs = backlogs;
@@ -31,16 +36,13 @@ public class Candidate {
         return graduationYear;
     }
 
-    public String[] getSkills() {
-        return skills;
-    }
-
-    public boolean hasSkill(String skill) {
+    public boolean hasSkill(String requiredSkill) {
         for (int i = 0; i < skills.length; i++) {
-            if (skills[i].equalsIgnoreCase(skill)) {
+            if (skills[i].equalsIgnoreCase(requiredSkill)) {
                 return true;
             }
         }
+
         return false;
     }
 }
